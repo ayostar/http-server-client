@@ -1,0 +1,23 @@
+{
+  "name": "http-server",
+  "version": "1.0.0",
+  "description": "HTTP server",
+  "main": "server.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "forever server.js",
+    "watch": "forever -w server.js"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "repository": "https://github.com/ayostar/http",
+  "author": "Artem Starodubtsev <ayostar@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "forever": "^4.0.1",
+    "koa": "^2.13.4",
+    "koa-body": "^4.2.0",
+    "uuid": "^8.3.2"
+  }
+}
