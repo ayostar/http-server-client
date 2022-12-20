@@ -104,7 +104,10 @@ export default class TicketsWidget {
         this.modal.modal.querySelector('.input-description').value =
           resolve.description;
       });
-      this.modal.openModal(() => this.editTicket(this.id));
+      this.modal.openModal((event) => {
+        // event.preventDefault();
+        this.editTicket(this.id);
+      });
     }
 
     if (

@@ -40,7 +40,9 @@ export default class Modal {
     this.activeModal.style.left = `${
       (window.innerWidth - this.activeModal.offsetWidth) / 2
     }px`;
-    this.cancelBtn.addEventListener('click', (event) => this.closeModal(event));
+    this.cancelBtn.addEventListener('click', (event) => {
+      this.closeModal(event);
+    });
     this.form.addEventListener('submit', callback);
   }
 
