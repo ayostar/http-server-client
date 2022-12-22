@@ -16,17 +16,31 @@ class Tickets {
   }
 }
 
-const firstTicket = new Tickets(uuid.v4(), 'Поменять краску в притере, ком. 404', 'Принтер HP LJ 1210, катриджи на складе', true, new Date());
-const secondTicket = new Tickets(uuid.v4(), 'установить обровление KB-1245', 'Пришло критическое обновление для Windows, нужно поставить обновление в следующем приоритете:\n 1. Сервера (незабыть сделать бэкап!)\n 2. Рабочие станции', false, new Date());
+const firstTicket = new Tickets(
+  uuid.v4(),
+  'Поменять краску в притере, ком. 404',
+  'Принтер HP LJ 1210, катриджи на складе',
+  true,
+  new Date()
+);
+const secondTicket = new Tickets(
+  uuid.v4(),
+  'установить обровление KB-1245',
+  'Пришло критическое обновление для Windows, нужно поставить обновление в следующем приоритете:\n 1. Сервера (незабыть сделать бэкап!)\n 2. Рабочие станции',
+  false,
+  new Date()
+);
 tickets.push(firstTicket);
 tickets.push(secondTicket);
 
-app.use(koaBody({
-  urlencoded: true,
-  multipart: true,
-  text: true,
-  json: true,
-}));
+app.use(
+  koaBody({
+    urlencoded: true,
+    multipart: true,
+    text: true,
+    json: true,
+  })
+);
 
 app.use(async (ctx, next) => {
   const origin = ctx.request.get('Origin');
@@ -57,15 +71,17 @@ app.use(async (ctx, next) => {
     });
 
     if (ctx.request.get('Access-Control-Request-Headers')) {
-      ctx.response.set('Access-Control-Allow-Headers', ctx.request.get('Access-Control-Request-Headers'));
+      ctx.response.set(
+        'Access-Control-Allow-Headers',
+        ctx.request.get('Access-Control-Request-Headers')
+      );
     }
 
     ctx.response.status = 204;
   }
 });
 
-
-app.use(async ctx => {
+app.use(async (ctx) => {
   const { method, id } = ctx.request.query;
   const { name, description, status } = ctx.request.body;
 
