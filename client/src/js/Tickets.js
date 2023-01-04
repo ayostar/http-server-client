@@ -18,21 +18,10 @@ export default class Tickets {
       checkbox = '';
     }
 
-    ticket.innerHTML =
-      '<div class="ticket-view">\n' +
-      '                 <label class="ticket-label">\n' +
-      `                   <input type="checkbox" class="ticket-checkbox" ${checkbox}>\n` +
-      '                   <span class="ticket-span"></span>\n' +
-      '                 </label>\n' +
-      '                 <div class="ticket-content">\n' +
-      `                   <div class="ticket-name">${this.name}</div>\n` +
-      '                 </div>\n' +
-      '               </div>\n' +
-      `               <div class="ticket-created">${formated}</div>\n` +
-      '               <div class="ticket-control">\n' +
-      '                 <button type="button" class="edit-btn">&#9998</button>\n' +
-      '                 <button type="button" class="delete-btn">X</button>\n' +
-      '               </div>\n';
+    ticket.innerHTML = `<div class="ticket-view">\n<label class="ticket-label">\n<input type="checkbox" class="ticket-checkbox" ${checkbox}>\n
+    <span class="ticket-span"></span>\n</label>\n<div class="ticket-content">\n<div class="ticket-name">${this.name}</div>\n</div>\n
+    </div>\n<div class="ticket-created">${formated}</div>\n<div class="ticket-control">\n<button type="button" class="edit-btn">&#9998</button>\n
+    <button type="button" class="delete-btn">X</button>\n</div>\n`;
 
     return ticket;
   }
@@ -41,12 +30,13 @@ export default class Tickets {
     const data = new Date(date);
 
     let day = data.getDate();
-    const month = data.getMonth();
+    let month = data.getMonth();
     const year = data.getFullYear();
     let hour = data.getHours();
     let minutes = data.getMinutes();
 
     day = day < 10 ? `0${day}` : day;
+    month = month < 10 ? `0${month + 1}` : `${month + 1}`;
     hour = hour < 10 ? `0${hour}` : hour;
     minutes = minutes < 10 ? `0${minutes}` : minutes;
 

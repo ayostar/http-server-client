@@ -8,13 +8,11 @@ export default class DeleteModal {
   init() {
     this.modal.classList.add('modal', 'delete-modal', 'hidden');
 
-    this.modal.innerHTML =
-      '<h2 class="modal-title">Удалить тикет</h2>\n' +
-      '                     <div class="modal-text">Вы уверены, что хотите удалить тикет? Это действие необратимо.</div>\n' +
-      '                     <div class="btn-box">\n' +
-      '                       <button class="del-cancel-btn" type="button">Отмена</button>\n' +
-      '                       <button class="del-ok-btn" type="submit">Ок</button>\n' +
-      '                     </div>';
+    this.modal.innerHTML = `<h2 class="modal-title">Удалить тикет</h2>\n
+      <div class="modal-text">Вы уверены, что хотите удалить тикет? Это действие необратимо.</div>\n
+      <div class="btn-box">\n
+      <button class="del-cancel-btn" type="button">Отмена</button>\n
+      <button class="del-ok-btn" type="submit">Ок</button>\n</div>`;
 
     this.parentEl.append(this.modal);
     this.deleteModal = document.querySelector('.delete-modal');

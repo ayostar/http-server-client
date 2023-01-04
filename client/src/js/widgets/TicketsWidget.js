@@ -52,7 +52,6 @@ export default class TicketsWidget {
 
     this.delOkBtn.addEventListener('click', (event) => {
       event.preventDefault();
-
       this.deleteTicket(this.id);
     });
   }
@@ -104,7 +103,10 @@ export default class TicketsWidget {
         this.modal.modal.querySelector('.input-description').value =
           resolve.description;
       });
-      this.modal.openModal(() => this.editTicket(this.id));
+
+      this.modal.openModal(() => {
+        this.editTicket(this.id);
+      });
     }
 
     if (
@@ -139,7 +141,8 @@ export default class TicketsWidget {
     }
   }
 
-  addTicket() {
+  addTicket(event) {
+    event.preventDefault();
     const request = this.request.createTicket(
       this.modal.name.value,
       this.modal.description.value,
@@ -147,6 +150,7 @@ export default class TicketsWidget {
     request.then(() => {
       this.renderAllTickets();
     });
+    this.modal.closeModal(event);
   }
 
   deleteTicket(id) {
