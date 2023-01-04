@@ -18,14 +18,14 @@ class Tickets {
 
 const firstTicket = new Tickets(
   uuid.v4(),
-  'Поменять краску в притере, ком. 404',
+  'Поменять краску в принтере, ком. 404',
   'Принтер HP LJ 1210, катриджи на складе',
   true,
   new Date()
 );
 const secondTicket = new Tickets(
   uuid.v4(),
-  'установить обровление KB-1245',
+  'установить обновление KB-1245',
   'Пришло критическое обновление для Windows, нужно поставить обновление в следующем приоритете:\n 1. Сервера (незабыть сделать бэкап!)\n 2. Рабочие станции',
   false,
   new Date()
@@ -110,6 +110,7 @@ app.use(async (ctx) => {
       const newId = uuid.v4();
       const created = new Date();
       tickets.push(new Tickets(newId, name, description, false, created));
+      console.log(tickets);
       ctx.response.body = tickets;
       break;
     case 'removeById':
