@@ -6,9 +6,11 @@ export default class Modal {
     this.request = new Request();
   }
 
-  init() {
-    this.modal.classList.add('modal', 'add-modal', 'hidden');
-    this.modal.innerHTML = `<form class="modal-form">\n
+  drawModal(modalType) {
+    this.modal.classList.add('modal');
+    if (modalType === 'addTicket') {
+      this.modal.classList.add('modal-handler');
+      this.modal.innerHTML = `<form class="modal-form">\n
       <h2 class="modal-title">Добавить тикет</h2>\n
       <label class="label-container">\n
         <span class="input-title">Краткое описание</span>\n<input class="input-name" type="text" required>\n
@@ -23,23 +25,48 @@ export default class Modal {
       </div>\n
       </form>`;
 
+      this.name = this.modal.querySelector('.input-name');
+      this.description = this.modal.querySelector('.input-description');
+
+      this.name.value = '';
+      this.description.value = '';
+    } else if (modalType === 'editTicket') {
+      this.modal.classList.add('modal-handler');
+      this.modal.innerHTML = `<form class="modal-form">\n
+      <h2 class="modal-title">Изменить тикет</h2>\n
+      <label class="label-container">\n
+        <span class="input-title">Краткое описание</span>\n<input class="input-name" type="text" required>\n
+      </label>\n
+      <label class="label-container">\n
+        <span class="input-title">Подробное описание</span>\n
+        <textarea class="input-description" type="text" required></textarea>\n
+      </label>\n
+      <div class="btn-box">\n
+        <button class="cancel-btn" type="button">Отмена</button>\n
+        <button class="ok-btn" type="submit">Ок</button>\n
+      </div>\n
+      </form>`;
+    }
+
     this.parentEl.append(this.modal);
-    this.activeModal = document.querySelector('.modal');
+    this.activeModal = document.querySelector('.modal-handler');
     this.form = this.modal.querySelector('.modal-form');
     this.name = this.modal.querySelector('.input-name');
     this.description = this.modal.querySelector('.input-description');
     this.cancelBtn = this.modal.querySelector('.cancel-btn');
     this.okBtn = this.modal.querySelector('.ok-btn');
-  }
 
-  openModal(callback) {
-    this.activeModal.classList.remove('hidden');
+    console.log((this.activeModal = document.querySelector('.modal-handler')));
+
     this.activeModal.style.top = `${
       (window.innerHeight - this.activeModal.offsetHeight) / 2
     }px`;
     this.activeModal.style.left = `${
       (window.innerWidth - this.activeModal.offsetWidth) / 2
     }px`;
+  }
+
+  modalHandler(callback) {
     this.cancelBtn.addEventListener('click', (event) => this.closeModal(event));
     this.form.addEventListener('submit', callback);
     console.log(callback);
@@ -47,7 +74,6 @@ export default class Modal {
 
   closeModal(event) {
     event.preventDefault();
-    this.activeModal.classList.add('hidden');
-    this.form.reset();
+    this.activeModal.remove();
   }
 }

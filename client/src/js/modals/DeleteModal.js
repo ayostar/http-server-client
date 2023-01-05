@@ -1,7 +1,6 @@
 export default class DeleteModal {
   constructor(parentEl, addModalEl) {
     this.parentEl = parentEl;
-    this.addModalEl = addModalEl;
     this.modal = document.createElement('div');
   }
 
@@ -21,10 +20,6 @@ export default class DeleteModal {
   }
 
   openDeleteModal() {
-    if (!this.addModalEl.modal.classList.contains('hidden')) {
-      this.addModalEl.modal.classList.add('hidden');
-    }
-
     this.deleteModal.classList.remove('hidden');
     this.deleteModal.style.top = `${
       (window.innerHeight - this.deleteModal.offsetHeight) / 2

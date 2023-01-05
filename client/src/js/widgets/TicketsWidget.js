@@ -27,7 +27,6 @@ export default class TicketsWidget {
   }
 
   init() {
-    this.modal.init();
     this.deleteModal.init();
     this.delOkBtn = document.querySelector('.del-ok-btn');
     this.renderAllTickets();
@@ -35,19 +34,8 @@ export default class TicketsWidget {
     this.addBtn.addEventListener('click', (event) => {
       event.preventDefault();
 
-      if (!this.deleteModal.deleteModal.classList.contains('hidden')) {
-        this.deleteModal.deleteModal.classList.add('hidden');
-      }
-
-      if (!this.modal.modal.classList.contains('hidden')) {
-        return;
-      }
-
-      this.modal.modal.querySelector('.modal-title').innerHTML =
-        'Добавить тикет';
-      this.modal.modal.querySelector('.input-name').value = '';
-      this.modal.modal.querySelector('.input-description').value = '';
-      this.modal.openModal(this.addTicket);
+      this.modal.drawModal('addTicket');
+      this.modal.modalHandler(this.addTicket);
     });
 
     this.delOkBtn.addEventListener('click', (event) => {
@@ -88,15 +76,6 @@ export default class TicketsWidget {
     }
 
     if (event.target.classList.contains('edit-btn')) {
-      if (!this.modal.modal.classList.contains('hidden')) {
-        return;
-      }
-      if (!this.deleteModal.deleteModal.classList.contains('hidden')) {
-        this.deleteModal.deleteModal.classList.add('hidden');
-      }
-
-      this.modal.modal.querySelector('.modal-title').innerHTML =
-        'Изменить тикет';
       const request = this.request.ticketById(this.id);
       request.then((resolve) => {
         this.modal.modal.querySelector('.input-name').value = resolve.name;
@@ -104,9 +83,8 @@ export default class TicketsWidget {
           resolve.description;
       });
 
-      this.modal.openModal(() => {
-        this.editTicket(this.id);
-      });
+      this.modal.drawModal('editTicket');
+      this.modal.modalHandler(this.editTicket);
     }
 
     if (
@@ -161,15 +139,18 @@ export default class TicketsWidget {
     });
   }
 
-  editTicket(id) {
+  editTicket(event) {
+    event.preventDefault();
     const request = this.request.editTicket(
-      id,
+      this.id,
       this.modal.name.value,
       this.modal.description.value,
     );
     request.then(() => {
       this.renderAllTickets();
     });
+
+    this.modal.closeModal(event);
   }
 
   checkTicket(id) {
