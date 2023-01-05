@@ -1,5 +1,5 @@
 export default class DeleteModal {
-  constructor(parentEl, addModalEl) {
+  constructor(parentEl) {
     this.parentEl = parentEl;
     this.modal = document.createElement('div');
   }

@@ -7,7 +7,7 @@ export default class Request {
   allTickets() {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', this.server + '?method=allTickets');
+      xhr.open('GET', `${this.server}?method=allTickets`);
       xhr.addEventListener('load', () => {
         if (xhr.status >= 200 && xhr.status < 300) {
           try {
@@ -27,7 +27,7 @@ export default class Request {
       const xhr = new XMLHttpRequest();
       const params = new URLSearchParams();
       params.append('id', id);
-      xhr.open('GET', this.server + `?method=ticketById&id=${id}`);
+      xhr.open('GET', `${this.server}?method=ticketById&id=${id}`);
       xhr.addEventListener('load', () => {
         if (xhr.status >= 200 && xhr.status < 300) {
           try {
@@ -48,7 +48,7 @@ export default class Request {
       params.append('name', name);
       params.append('description', description);
       const xhr = new XMLHttpRequest();
-      xhr.open('POST', this.server + '?method=createTicket');
+      xhr.open('POST', `${this.server}?method=createTicket`);
       xhr.addEventListener('load', () => {
         if (xhr.status >= 200 && xhr.status < 300) {
           try {
@@ -68,7 +68,7 @@ export default class Request {
       const xhr = new XMLHttpRequest();
       const params = new URLSearchParams();
       params.append('id', id);
-      xhr.open('DELETE', this.server + `?method=removeById&id=${id}`);
+      xhr.open('DELETE', `${this.server}?method=removeById&id=${id}`);
       xhr.addEventListener('load', () => {
         if (xhr.status >= 200 && xhr.status < 300) {
           try {
@@ -90,7 +90,7 @@ export default class Request {
       params.append('id', id);
       params.append('name', name);
       params.append('description', description);
-      xhr.open('POST', this.server + `?method=editTicket&id=${id}`);
+      xhr.open('POST', `${this.server}?method=editTicket&id=${id}`);
       xhr.addEventListener('load', () => {
         if (xhr.status >= 200 && xhr.status < 300) {
           try {
@@ -111,7 +111,7 @@ export default class Request {
       const params = new URLSearchParams();
       params.append('id', id);
       params.append('status', status);
-      xhr.open('POST', this.server + `?method=checkTicket&id=${id}`);
+      xhr.open('POST', `${this.server}?method=checkTicket&id=${id}`);
       xhr.addEventListener('load', () => {
         if (xhr.status >= 200 && xhr.status < 300) {
           try {

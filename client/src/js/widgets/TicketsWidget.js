@@ -79,8 +79,7 @@ export default class TicketsWidget {
       const request = this.request.ticketById(this.id);
       request.then((resolve) => {
         this.modal.modal.querySelector('.input-name').value = resolve.name;
-        this.modal.modal.querySelector('.input-description').value =
-          resolve.description;
+        this.modal.modal.querySelector('.input-description').value = resolve.description;
       });
 
       this.modal.drawModal('editTicket');
@@ -88,8 +87,8 @@ export default class TicketsWidget {
     }
 
     if (
-      event.target.classList.contains('ticket-name') ||
-      event.target.classList.contains('ticket-description')
+      event.target.classList.contains('ticket-name')
+      || event.target.classList.contains('ticket-description')
     ) {
       const ticketDes = curTicket.querySelector('.ticket-description');
 
@@ -107,8 +106,8 @@ export default class TicketsWidget {
     }
 
     if (
-      event.target.classList.contains('ticket-span') ||
-      event.target.classList.contains('ticket-checkbox')
+      event.target.classList.contains('ticket-span')
+      || event.target.classList.contains('ticket-checkbox')
     ) {
       if (curTicket.querySelector('.ticket-checkbox').checked) {
         this.status = false;

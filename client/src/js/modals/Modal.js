@@ -1,4 +1,5 @@
 import Request from '../request';
+
 export default class Modal {
   constructor(parentEl) {
     this.parentEl = parentEl;
@@ -50,13 +51,6 @@ export default class Modal {
 
     this.parentEl.append(this.modal);
     this.activeModal = document.querySelector('.modal-handler');
-    this.form = this.modal.querySelector('.modal-form');
-    this.name = this.modal.querySelector('.input-name');
-    this.description = this.modal.querySelector('.input-description');
-    this.cancelBtn = this.modal.querySelector('.cancel-btn');
-    this.okBtn = this.modal.querySelector('.ok-btn');
-
-    console.log((this.activeModal = document.querySelector('.modal-handler')));
 
     this.activeModal.style.top = `${
       (window.innerHeight - this.activeModal.offsetHeight) / 2
@@ -67,9 +61,13 @@ export default class Modal {
   }
 
   modalHandler(callback) {
+    this.name = this.modal.querySelector('.input-name');
+    this.description = this.modal.querySelector('.input-description');
+    this.form = this.modal.querySelector('.modal-form');
+    this.cancelBtn = this.modal.querySelector('.cancel-btn');
+
     this.cancelBtn.addEventListener('click', (event) => this.closeModal(event));
     this.form.addEventListener('submit', callback);
-    console.log(callback);
   }
 
   closeModal(event) {
